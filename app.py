@@ -1044,7 +1044,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ============================================================================
 st.markdown('<p class="section-title">📋 Raw Data Preview</p>', unsafe_allow_html=True)
  
-with st.expander ("View Detailed Data Table", expanded=False):
+with st.expander("📋 View Detailed Data Table", expanded=False):
     display_cols = ['date', 'traffic_source', 'device', 'city', 'state',
                     'session_duration_sec', 'pages_viewed', 'purchase',
                     'order_value', 'age', 'gender', 'festival']
