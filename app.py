@@ -178,7 +178,7 @@ st.markdown("""
  
     .kpi-sub {
         font-size: 0.78em !important;
-        color: #4a5568 !important;
+        color: #94a3b8 !important;
         margin-top: 8px !important;
         font-weight: 500 !important;
     }
@@ -231,15 +231,29 @@ st.markdown("""
     }
  
     /* ── Expander ── */
-    .streamlit-expanderHeader {
+    .streamlit-expanderHeader,
+    [data-testid="stExpander"] summary,
+    [data-testid="stExpander"] > div:first-child {
         background: #111827 !important;
         color: #90cdf4 !important;
         border-radius: 8px !important;
         border: 1px solid rgba(99,179,237,0.15) !important;
+        font-weight: 600 !important;
+        font-size: 0.92em !important;
+        padding: 12px 16px !important;
     }
-    .streamlit-expanderContent {
+    [data-testid="stExpander"] summary p,
+    [data-testid="stExpander"] summary span {
+        color: #90cdf4 !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+    .streamlit-expanderContent,
+    [data-testid="stExpander"] > div:last-child {
         background: #0d1525 !important;
         border: 1px solid rgba(99,179,237,0.1) !important;
+        border-top: none !important;
         border-radius: 0 0 8px 8px !important;
     }
  
@@ -283,11 +297,14 @@ st.markdown("""
         padding: 28px;
         text-align: center;
         margin-top: 40px;
-        color: #4a5568;
+        color: #94a3b8;
     }
     .dash-footer h3 {
         color: #90cdf4 !important;
         margin: 0 0 8px 0 !important;
+    }
+    .dash-footer p {
+        color: #94a3b8 !important;
     }
  
     /* scrollbar */
@@ -1044,10 +1061,11 @@ with st.expander("View Detailed Data Table", expanded=False):
 st.markdown("""
 <div class="dash-footer">
     <h3>📊 E-Commerce Analytics Dashboard</h3>
-    <p style="color:#4a5568; margin:6px 0 0 0;">Data-driven insights for optimising your e-commerce platform</p>
+    <p style="color:#94a3b8; margin:6px 0 0 0;">Data-driven insights for optimising your e-commerce platform</p>
     <hr style="border:none; border-top:1px solid rgba(99,179,237,0.1); margin:16px 0;">
-    <p style="margin:0; font-size:0.85em; color:#2d3748;">
+    <p style="margin:0; font-size:0.85em; color:#94a3b8;">
         🎨 Designed by: <b style="color:#90cdf4;">Ankit</b> &nbsp;|&nbsp; 📅 Updated: 2024
     </p>
 </div>
 """, unsafe_allow_html=True)
+ 
