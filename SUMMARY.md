@@ -42,7 +42,7 @@ ecommerce-dashboard/
 │   └─ Step-by-step setup instructions
 │   └─ Troubleshooting & deployment options
 │
-├── 📊 Ecommerce_Website_Traffic_India_MORE_DIRTY.xlsx    [DATA]
+├── 📊 Ecommerce_Website_Traffic_India.xlsx    [DATA]
 │   └─ 15,004 records
 │   └─ 22 columns of e-commerce data
 │   └─ Date range: January - November 2024
