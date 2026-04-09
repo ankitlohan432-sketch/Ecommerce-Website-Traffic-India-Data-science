@@ -1,3 +1,6 @@
+
+Copy
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -6,7 +9,7 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import warnings
 warnings.filterwarnings('ignore')
-
+ 
 # ============================================================================
 # PAGE CONFIG
 # ============================================================================
@@ -16,14 +19,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
+ 
 # ============================================================================
 # CUSTOM CSS — PROFESSIONAL DARK DASHBOARD
 # ============================================================================
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
-
+ 
     /* ── Global Background ── */
     html, body, [data-testid="stAppViewContainer"] {
         background: #080d1a !important;
@@ -36,7 +39,7 @@ st.markdown("""
         padding-top: 1.5rem !important;
         padding-bottom: 3rem !important;
     }
-
+ 
     /* ── Fonts ── */
     *, p, li, span, label, div {
         font-family: 'DM Sans', sans-serif !important;
@@ -44,7 +47,7 @@ st.markdown("""
     h1, h2, h3, h4 {
         font-family: 'Syne', sans-serif !important;
     }
-
+ 
     /* ── Sidebar ── */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #0d1525 0%, #111827 100%) !important;
@@ -68,7 +71,7 @@ st.markdown("""
         color: #90cdf4 !important;
         border: 1px solid rgba(99, 179, 237, 0.3) !important;
     }
-
+ 
     /* ── Header ── */
     .dash-header {
         background: linear-gradient(135deg, #0f1f3d 0%, #1a2d4e 50%, #0f1f3d 100%);
@@ -122,7 +125,7 @@ st.markdown("""
         border-radius: 20px;
         margin-bottom: 10px;
     }
-
+ 
     /* ── KPI CARDS — vivid dark glassmorphism ── */
     .kpi-card {
         background: linear-gradient(145deg, #111827 0%, #1a2540 100%);
@@ -149,7 +152,7 @@ st.markdown("""
     .kpi-card.coral::before  { background: linear-gradient(90deg, #f6875f, #ed6b46); }
     .kpi-card.gold::before   { background: linear-gradient(90deg, #fbd38d, #f6ad55); }
     .kpi-card.rose::before   { background: linear-gradient(90deg, #fc8181, #e53e3e); }
-
+ 
     .kpi-label {
         font-size: 0.7em !important;
         font-weight: 600 !important;
@@ -175,14 +178,14 @@ st.markdown("""
     .kpi-card.coral .kpi-value { color: #f6875f !important; }
     .kpi-card.gold  .kpi-value { color: #fbd38d !important; }
     .kpi-card.rose  .kpi-value { color: #fc8181 !important; }
-
+ 
     .kpi-sub {
         font-size: 0.78em !important;
         color: #4a5568 !important;
         margin-top: 8px !important;
         font-weight: 500 !important;
     }
-
+ 
     /* ── Section Titles ── */
     .section-title {
         font-family: 'Syne', sans-serif !important;
@@ -194,7 +197,7 @@ st.markdown("""
         border-bottom: 2px solid rgba(99,179,237,0.2) !important;
         margin: 28px 0 20px !important;
     }
-
+ 
     /* ── Tabs ── */
     .stTabs [data-baseweb="tab-list"] {
         background: #0d1525 !important;
@@ -216,7 +219,7 @@ st.markdown("""
         color: #90cdf4 !important;
         border-bottom: none !important;
     }
-
+ 
     /* ── Buttons ── */
     .stButton > button {
         background: linear-gradient(135deg, #1a3a5c 0%, #2a4a6c 100%) !important;
@@ -229,7 +232,7 @@ st.markdown("""
         background: linear-gradient(135deg, #2a4a6c, #3a5a7c) !important;
         box-shadow: 0 4px 15px rgba(99,179,237,0.2) !important;
     }
-
+ 
     /* ── Expander ── */
     .streamlit-expanderHeader {
         background: #111827 !important;
@@ -242,14 +245,14 @@ st.markdown("""
         border: 1px solid rgba(99,179,237,0.1) !important;
         border-radius: 0 0 8px 8px !important;
     }
-
+ 
     /* ── Dataframe ── */
     [data-testid="stDataFrame"] {
         background: #111827 !important;
         border-radius: 10px !important;
         border: 1px solid rgba(99,179,237,0.12) !important;
     }
-
+ 
     /* ── Info box ── */
     [data-testid="stInfo"] {
         background: rgba(99,179,237,0.08) !important;
@@ -257,7 +260,7 @@ st.markdown("""
         color: #90cdf4 !important;
         border-radius: 10px !important;
     }
-
+ 
     /* ── Designer credit badge ── */
     .designer-credit {
         position: fixed;
@@ -274,7 +277,7 @@ st.markdown("""
         z-index: 100;
         letter-spacing: 0.5px;
     }
-
+ 
     /* ── Footer ── */
     .dash-footer {
         background: linear-gradient(135deg, #0d1525 0%, #111827 100%);
@@ -289,14 +292,14 @@ st.markdown("""
         color: #90cdf4 !important;
         margin: 0 0 8px 0 !important;
     }
-
+ 
     /* scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #080d1a; }
     ::-webkit-scrollbar-thumb { background: #1a3a5c; border-radius: 3px; }
 </style>
 """, unsafe_allow_html=True)
-
+ 
 # ============================================================================
 # SHARED PLOTLY THEME  — dark, clean, readable
 # ============================================================================
@@ -307,7 +310,7 @@ AXIS_COLOR = "#4a5568"
 TICK_COLOR = "#718096"
 FONT_COLOR = "#e2e8f0"
 ACCENT_COLORS = ["#63b3ed", "#f6875f", "#fbd38d", "#68d391", "#fc8181", "#b794f4"]
-
+ 
 def dark_layout(fig, title="", height=500, scene3d=False):
     """Apply consistent dark theme to any plotly figure."""
     fig.update_layout(
@@ -335,7 +338,7 @@ def dark_layout(fig, title="", height=500, scene3d=False):
             title_font=dict(color=TICK_COLOR), zeroline=False
         )
     return fig
-
+ 
 def apply_3d_layout(fig, title, xlabel, ylabel, zlabel, height=500):
     """Apply dark 3D layout with labelled axes to any 3D figure."""
     sc = dark_scene()
@@ -352,7 +355,7 @@ def apply_3d_layout(fig, title, xlabel, ylabel, zlabel, height=500):
         margin=dict(l=0, r=0, b=0, t=50),
     )
     return fig
-
+ 
 def make_3d_bars(categories, values, colors, xlabel="Category", ylabel="Index",
                  zlabel="Value", width=0.4):
     """
@@ -406,7 +409,7 @@ def make_3d_bars(categories, values, colors, xlabel="Category", ylabel="Index",
     fig.update_layout(scene=sc, paper_bgcolor=PAPER_BG,
                       font=dict(color=TICK_COLOR), showlegend=False)
     return fig
-
+ 
 def dark_scene():
     """Return a Plotly scene dict with correct dark 3D styling."""
     axis_style = dict(
@@ -414,7 +417,7 @@ def dark_scene():
         gridcolor="rgba(99,179,237,0.15)",
         linecolor="rgba(99,179,237,0.3)",
         tickfont=dict(color="#94a3b8", size=10),
-        titlefont=dict(color="#90cdf4", size=12, family="DM Sans"),
+        title=dict(font=dict(color="#90cdf4", size=12, family="DM Sans")),
         showbackground=True,
         zerolinecolor="rgba(99,179,237,0.2)",
     )
@@ -425,59 +428,59 @@ def dark_scene():
         bgcolor="#080d1a",
         camera=dict(eye=dict(x=1.6, y=1.6, z=1.2)),
     )
-
+ 
 # ============================================================================
 # LOAD AND PREPARE DATA
 # ============================================================================
 @st.cache_data
 def load_data():
     df = pd.read_excel('Ecommerce_Website_Traffic_India.xlsx')
-
+ 
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
     df = df.drop_duplicates()
     df = df.dropna(subset=['user_id', 'time'])
-
+ 
     df['date'] = pd.to_datetime(df['date'], dayfirst=True, errors='coerce')
     df = df.dropna(subset=['date'])
-
+ 
     numeric_cols = df.select_dtypes(include=np.number).columns
     df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].median())
-
+ 
     return df
-
+ 
 df = load_data()
-
+ 
 # ============================================================================
 # SIDEBAR FILTERS
 # ============================================================================
 st.sidebar.markdown("### 🎯  FILTERS")
 st.sidebar.markdown("---")
-
+ 
 date_range = st.sidebar.date_input(
     "📅 Date Range",
     value=(df['date'].min(), df['date'].max()),
     min_value=df['date'].min(),
     max_value=df['date'].max()
 )
-
+ 
 traffic_sources = st.sidebar.multiselect(
     "🔗 Traffic Source",
     options=sorted(df['traffic_source'].unique()),
     default=df['traffic_source'].unique()
 )
-
+ 
 devices = st.sidebar.multiselect(
     "📱 Device Type",
     options=sorted(df['device'].unique()),
     default=df['device'].unique()
 )
-
+ 
 festivals = st.sidebar.multiselect(
     "🎉 Festival",
     options=sorted(df['festival'].unique()),
     default=df['festival'].unique()
 )
-
+ 
 # Apply Filters
 filtered_df = df[
     (df['date'].dt.date >= date_range[0]) &
@@ -486,7 +489,7 @@ filtered_df = df[
     (df['device'].isin(devices)) &
     (df['festival'].isin(festivals))
 ].copy()
-
+ 
 # ============================================================================
 # HEADER
 # ============================================================================
@@ -497,16 +500,16 @@ st.markdown("""
     <p>Advanced insights into India's e-commerce website traffic patterns &amp; user behaviour</p>
 </div>
 """, unsafe_allow_html=True)
-
+ 
 st.markdown("""<div class="designer-credit">🎨 Designer: Ankit</div>""", unsafe_allow_html=True)
-
+ 
 # ============================================================================
 # KPI CARDS
 # ============================================================================
 st.markdown('<p class="section-title">📈 Key Performance Indicators</p>', unsafe_allow_html=True)
-
+ 
 col1, col2, col3, col4 = st.columns(4)
-
+ 
 with col1:
     st.markdown(f"""
     <div class="kpi-card blue">
@@ -514,7 +517,7 @@ with col1:
         <p class="kpi-value">{len(filtered_df):,}</p>
         <p class="kpi-sub">Active user sessions</p>
     </div>""", unsafe_allow_html=True)
-
+ 
 with col2:
     conversion_rate = (filtered_df['purchase'].sum() / len(filtered_df)) * 100
     st.markdown(f"""
@@ -523,7 +526,7 @@ with col2:
         <p class="kpi-value">{conversion_rate:.2f}%</p>
         <p class="kpi-sub">Purchase conversion</p>
     </div>""", unsafe_allow_html=True)
-
+ 
 with col3:
     avg_order_value = filtered_df['order_value'].mean()
     st.markdown(f"""
@@ -532,7 +535,7 @@ with col3:
         <p class="kpi-value">₹{avg_order_value:,.0f}</p>
         <p class="kpi-sub">Average revenue per order</p>
     </div>""", unsafe_allow_html=True)
-
+ 
 with col4:
     bounce_rate = (filtered_df['bounce'].sum() / len(filtered_df)) * 100
     st.markdown(f"""
@@ -541,21 +544,21 @@ with col4:
         <p class="kpi-value">{bounce_rate:.2f}%</p>
         <p class="kpi-sub">Session exits without action</p>
     </div>""", unsafe_allow_html=True)
-
+ 
 st.markdown("<br>", unsafe_allow_html=True)
-
+ 
 # ============================================================================
 # 3D VISUALIZATIONS
 # ============================================================================
 st.markdown('<p class="section-title">🎨 Advanced 3D Analytics</p>', unsafe_allow_html=True)
-
+ 
 tab1, tab2, tab3, tab4 = st.tabs([
     "📊 3D Scatter Analysis",
     "🗺️ Geographic 3D",
     "⏰ Time Series 3D",
     "🛍️ Product Category 3D"
 ])
-
+ 
 # ── TAB 1 ──
 with tab1:
     col_left, col_right = st.columns([3, 1])
@@ -587,12 +590,12 @@ with tab1:
                                          sample['device'])],
             hovertemplate='<b>Session Details</b><br>%{text}<extra></extra>'
         )])
-
+ 
         scene = dark_scene()
         scene['xaxis']['title'] = 'Session Duration (seconds)'
         scene['yaxis']['title'] = 'Pages Viewed'
         scene['zaxis']['title'] = 'Order Value (₹)'
-
+ 
         fig_3d_scatter.update_layout(
             title=dict(text="<b>Session Duration × Pages Viewed × Order Value</b>",
                        font=dict(color=FONT_COLOR, size=14, family="Syne"), x=0.02),
@@ -603,21 +606,21 @@ with tab1:
             margin=dict(l=0, r=0, b=0, t=50),
         )
         st.plotly_chart(fig_3d_scatter, use_container_width=True)
-
+ 
     with col_right:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.info("""
 **Key Findings:**
-
+ 
 🎯 Higher page views → higher order values
-
+ 
 ⏱️ Session duration positively correlates with purchases
-
+ 
 💡 Optimise user journey to increase pages viewed
-
+ 
 🔍 Focus on reducing bounce for high-value products
         """)
-
+ 
 # ── TAB 2 ──
 with tab2:
     state_data = filtered_df.groupby('state').agg(
@@ -625,7 +628,7 @@ with tab2:
         sessions=('user_id', 'count'),
         purchases=('purchase', 'sum')
     ).reset_index().sort_values('total_value', ascending=False).head(15)
-
+ 
     fig_3d_geo = go.Figure(data=[go.Scatter3d(
         x=state_data['sessions'],
         y=state_data['purchases'],
@@ -650,12 +653,12 @@ with tab2:
         ),
         hovertemplate='<b>%{text}</b><br>Sessions: %{x}<br>Purchases: %{y}<br>Revenue: ₹%{z:,.0f}<extra></extra>'
     )])
-
+ 
     scene2 = dark_scene()
     scene2['xaxis']['title'] = 'Total Sessions'
     scene2['yaxis']['title'] = 'Total Purchases'
     scene2['zaxis']['title'] = 'Total Revenue (₹)'
-
+ 
     fig_3d_geo.update_layout(
         title=dict(text="<b>Top 15 States — 3D Revenue Analysis</b>",
                    font=dict(color=FONT_COLOR, size=14, family="Syne"), x=0.02),
@@ -666,7 +669,7 @@ with tab2:
         margin=dict(l=0, r=0, b=0, t=50),
     )
     st.plotly_chart(fig_3d_geo, use_container_width=True)
-
+ 
 # ── TAB 3 ──
 with tab3:
     daily_data = filtered_df.groupby(filtered_df['date'].dt.date).agg(
@@ -676,7 +679,7 @@ with tab3:
     ).reset_index()
     daily_data.columns = ['date', 'sessions', 'revenue', 'purchases']
     daily_data['date_num'] = range(len(daily_data))
-
+ 
     fig_3d_time = go.Figure(data=[go.Scatter3d(
         x=daily_data['date_num'],
         y=daily_data['sessions'],
@@ -701,12 +704,12 @@ with tab3:
                                     daily_data['revenue'], daily_data['purchases'])],
         hovertemplate='<b>Daily Metrics</b><br>%{text}<extra></extra>'
     )])
-
+ 
     scene3 = dark_scene()
     scene3['xaxis']['title'] = 'Day Number'
     scene3['yaxis']['title'] = 'Sessions'
     scene3['zaxis']['title'] = 'Revenue (₹)'
-
+ 
     fig_3d_time.update_layout(
         title=dict(text="<b>Daily Traffic & Revenue Trend</b>",
                    font=dict(color=FONT_COLOR, size=14, family="Syne"), x=0.02),
@@ -717,7 +720,7 @@ with tab3:
         margin=dict(l=0, r=0, b=0, t=50),
     )
     st.plotly_chart(fig_3d_time, use_container_width=True)
-
+ 
 # ── TAB 4 ──
 with tab4:
     categories = ['home_appliances', 'office_equipments', 'beauty_products', 'clothing', 'technical_devices']
@@ -730,7 +733,7 @@ with tab4:
             'revenue': float(filtered_df[filtered_df[cat] == 1]['order_value'].sum())
         })
     cat_df = pd.DataFrame(cat_rows)
-
+ 
     fig_3d_cat = go.Figure(data=[go.Scatter3d(
         x=cat_df['views'],
         y=cat_df['purchases'],
@@ -747,12 +750,12 @@ with tab4:
         ),
         hovertemplate='<b>%{text}</b><br>Views: %{x}<br>Purchases: %{y}<br>Revenue: ₹%{z:,.0f}<extra></extra>'
     )])
-
+ 
     scene4 = dark_scene()
     scene4['xaxis']['title'] = 'Total Views'
     scene4['yaxis']['title'] = 'Total Purchases'
     scene4['zaxis']['title'] = 'Total Revenue (₹)'
-
+ 
     fig_3d_cat.update_layout(
         title=dict(text="<b>Product Categories — 3D Performance Matrix</b>",
                    font=dict(color=FONT_COLOR, size=14, family="Syne"), x=0.02),
@@ -763,16 +766,16 @@ with tab4:
         margin=dict(l=0, r=0, b=0, t=50),
     )
     st.plotly_chart(fig_3d_cat, use_container_width=True)
-
+ 
 st.markdown("<br>", unsafe_allow_html=True)
-
+ 
 # ============================================================================
 # DETAILED ANALYTICS SECTION
 # ============================================================================
 st.markdown('<p class="section-title">📊 Detailed Performance Metrics</p>', unsafe_allow_html=True)
-
+ 
 col1, col2 = st.columns(2)
-
+ 
 # Traffic Source — 3D Bar
 with col1:
     traffic_stats = filtered_df.groupby('traffic_source').agg(
@@ -780,7 +783,7 @@ with col1:
         purchases=('purchase', 'sum'),
         revenue=('order_value', 'sum')
     ).reset_index().sort_values('revenue', ascending=False)
-
+ 
     fig_traffic = go.Figure()
     colors_t = ACCENT_COLORS[:len(traffic_stats)]
     for i, (_, row) in enumerate(traffic_stats.iterrows()):
@@ -821,7 +824,7 @@ with col1:
         margin=dict(l=0, r=0, b=0, t=50), showlegend=False,
     )
     st.plotly_chart(fig_traffic, use_container_width=True)
-
+ 
 # Device Performance — 3D Bar
 with col2:
     device_stats = filtered_df.groupby('device').agg(
@@ -829,7 +832,7 @@ with col2:
         purchases=('purchase', 'sum')
     ).reset_index()
     device_stats['conversion'] = (device_stats['purchases'] / device_stats['sessions'] * 100)
-
+ 
     color_map = {'Mobile': '#63b3ed', 'Desktop': '#f6875f', 'Tablet': '#fbd38d'}
     fig_device = go.Figure()
     for i, (_, row) in enumerate(device_stats.iterrows()):
@@ -871,9 +874,9 @@ with col2:
         margin=dict(l=0, r=0, b=0, t=50), showlegend=False,
     )
     st.plotly_chart(fig_device, use_container_width=True)
-
+ 
 col3, col4 = st.columns(2)
-
+ 
 # Age Group — 3D Bubble Scatter
 with col3:
     filtered_df['age_group'] = pd.cut(
@@ -887,7 +890,7 @@ with col3:
         purchases=('purchase', 'sum')
     ).reset_index()
     age_stats['conversion'] = age_stats['purchases'] / age_stats['sessions'] * 100
-
+ 
     fig_age = go.Figure(data=[go.Scatter3d(
         x=list(range(len(age_stats))),
         y=age_stats['sessions'],
@@ -919,14 +922,14 @@ with col3:
         margin=dict(l=0, r=0, b=0, t=50),
     )
     st.plotly_chart(fig_age, use_container_width=True)
-
+ 
 # Festival Impact — 3D Bar
 with col4:
     festival_stats = filtered_df.groupby('festival').agg(
         revenue=('order_value', 'sum'),
         sessions=('user_id', 'count')
     ).reset_index().sort_values('revenue', ascending=False)
-
+ 
     fig_festival = go.Figure()
     colors_f = ACCENT_COLORS * 3   # repeat if more festivals than accent colours
     for i, (_, row) in enumerate(festival_stats.iterrows()):
@@ -967,18 +970,18 @@ with col4:
         margin=dict(l=0, r=0, b=0, t=50), showlegend=False,
     )
     st.plotly_chart(fig_festival, use_container_width=True)
-
+ 
 st.markdown("<br>", unsafe_allow_html=True)
-
+ 
 # ============================================================================
 # CORRELATION HEATMAP
 # ============================================================================
 st.markdown('<p class="section-title">🔥 Correlation — 3D Surface</p>', unsafe_allow_html=True)
-
+ 
 numeric_cols = ['session_duration_sec', 'pages_viewed', 'bounce', 'product_viewed',
                 'add_to_cart', 'purchase', 'order_value', 'age']
 corr_matrix = filtered_df[numeric_cols].corr()
-
+ 
 # Build 3D surface from correlation matrix
 fig_heatmap = go.Figure(data=[go.Surface(
     z=corr_matrix.values,
@@ -1000,14 +1003,14 @@ fig_heatmap = go.Figure(data=[go.Surface(
     ),
     hovertemplate='<b>%{x}</b> × <b>%{y}</b><br>Correlation: %{z:.2f}<extra></extra>',
 )])
-
+ 
 sc_hm = dark_scene()
 sc_hm['xaxis']['title'] = 'Feature'
 sc_hm['yaxis']['title'] = 'Feature'
 sc_hm['zaxis']['title'] = 'Correlation'
 sc_hm['xaxis']['tickangle'] = -25
 sc_hm['camera'] = dict(eye=dict(x=1.8, y=1.8, z=1.4))
-
+ 
 fig_heatmap.update_layout(
     title=dict(text="<b>Feature Correlation — 3D Surface</b>",
                font=dict(color=FONT_COLOR, size=14, family="Syne"), x=0.02),
@@ -1017,16 +1020,16 @@ fig_heatmap.update_layout(
     height=600,
     margin=dict(l=0, r=0, b=0, t=50),
 )
-
+ 
 st.plotly_chart(fig_heatmap, use_container_width=True)
-
+ 
 st.markdown("<br>", unsafe_allow_html=True)
-
+ 
 # ============================================================================
 # DATA TABLE
 # ============================================================================
 st.markdown('<p class="section-title">📋 Raw Data Preview</p>', unsafe_allow_html=True)
-
+ 
 with st.expander("View Detailed Data Table", expanded=False):
     display_cols = ['date', 'traffic_source', 'device', 'city', 'state',
                     'session_duration_sec', 'pages_viewed', 'purchase',
@@ -1037,7 +1040,7 @@ with st.expander("View Detailed Data Table", expanded=False):
         height=400
     )
     st.markdown(f"**Total Records Displayed:** {min(100, len(filtered_df)):,} of {len(filtered_df):,}")
-
+ 
 # ============================================================================
 # FOOTER
 # ============================================================================
