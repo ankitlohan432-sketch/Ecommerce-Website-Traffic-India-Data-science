@@ -77,7 +77,7 @@ st.markdown("""
     
     /* Metric Cards */
     .metric-card {
-        background: white;
+        background: Black;
         padding: 25px;
         border-radius: 12px;
         border-left: 5px solid #E94560;
