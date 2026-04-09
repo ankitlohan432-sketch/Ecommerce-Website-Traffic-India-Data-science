@@ -154,7 +154,7 @@ st.markdown("""
 # ============================================================================
 @st.cache_data
 def load_data():
-    df = pd.read_excel('/mnt/user-data/uploads/Ecommerce_Website_Traffic_India_MORE_DIRTY.xlsx')
+    df = pd.read_excel('/mnt/user-data/uploads/Ecommerce_Website_Traffic_India.xlsx')
     
     # Data Cleaning
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
