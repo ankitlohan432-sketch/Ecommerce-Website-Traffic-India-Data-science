@@ -1,338 +1,208 @@
-# 📊 E-Commerce Traffic Analytics Dashboard
+# 📊 E-Commerce Traffic Analytics Dashboard — India
 
-**Designer:** i_courner/god ✨  
-**Version:** 1.0.0  
-**Status:** ✅ Production Ready  
-**Data:** India E-Commerce Website Traffic (Jan–Nov 2024)
+> A professional, fully 3D dark-themed analytics dashboard built with **Python + Streamlit + Plotly**.  
+> Designed by **Ankit** · Dataset: India E-Commerce Website Traffic
 
 ---
 
-## 🎯 Project Overview
+## 🖥️ Live Preview
 
-A professional, interactive **Streamlit-based analytics dashboard** that visualizes e-commerce website traffic data for India. Features cutting-edge **3D visualizations**, real-time filtering, and business intelligence insights across 15,004 user sessions and 22 data columns.
+![Dashboard Preview](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-3D%20Charts-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
 
 ---
 
-## ⚡ Quick Start (3 Steps)
+## ✨ Features
 
-### Step 1 — Install Dependencies
+### 📈 KPI Cards
+- **Total Sessions** — Live count of filtered user sessions
+- **Conversion Rate** — Purchase-to-session percentage
+- **Average Order Value** — Mean revenue per order in ₹
+- **Bounce Rate** — Percentage of sessions with no action
+
+### 🎨 Advanced 3D Analytics (4 Tabs)
+| Tab | Chart | Description |
+|-----|-------|-------------|
+| 📊 3D Scatter | `Scatter3d` | Session Duration × Pages Viewed × Order Value |
+| 🗺️ Geographic 3D | `Scatter3d` | Top 15 States — Sessions × Purchases × Revenue |
+| ⏰ Time Series 3D | `Scatter3d + Lines` | Daily Traffic & Revenue Trend over time |
+| 🛍️ Product Category 3D | `Scatter3d` | 5 product categories — Views × Purchases × Revenue |
+
+### 📊 Detailed Performance Metrics (All 3D)
+- **Revenue by Traffic Source** — 3D Mesh bar chart (6 sources)
+- **Conversion Rate by Device** — 3D Mesh bar chart (Mobile / Desktop / Tablet)
+- **Age Group Analysis** — 3D Bubble Scatter (sessions, revenue, conversion)
+- **Festival Revenue Impact** — 3D Mesh bar chart (Diwali, Holi, etc.)
+
+### 🔥 Correlation Surface
+- **3D Surface Plot** of the full 8-feature correlation matrix using `go.Surface` with contour projections
+
+### 📋 Raw Data Table
+- Filterable preview of up to 100 records with all key columns
+
+---
+
+## 🗂️ Project Structure
+
+```
+📦 ecommerce-dashboard/
+├── app.py                              # Main Streamlit application
+├── requirements.txt                    # Python dependencies
+├── Ecommerce_Website_Traffic_India.xlsx  # Dataset (place in same folder)
+└── README.md                           # This file
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone or download the project
+
+```bash
+git clone https://github.com/your-username/ecommerce-dashboard.git
+cd ecommerce-dashboard
+```
+
+### 2. Create a virtual environment (recommended)
+
+```bash
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+```
+
+### 3. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 2 — Run the App
+### 4. Place your dataset
+
+Make sure `Ecommerce_Website_Traffic_India.xlsx` is in the **same folder** as `app.py`.
+
+### 5. Run the dashboard
+
 ```bash
 streamlit run app.py
 ```
 
-### Step 3 — Open Browser
-```
-http://localhost:8501
-```
-
-> ✅ That's it! Your dashboard is running.
+The app will open automatically at **http://localhost:8501**
 
 ---
 
-## 📁 Project Files
+## 🌐 Deploy on Streamlit Cloud (Free)
 
-```
-ecommerce-dashboard/
-│
-├── app.py                                  ← Main Streamlit application (1000+ lines)
-├── requirements.txt                        ← Python dependencies
-├── README.md                               ← This file
-└── Ecommerce_Website_Traffic_India.xlsx    ← Dataset (15,004 records)
-```
+1. Push your project to a **GitHub repository**
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Click **"New app"** → connect your GitHub repo
+4. Set **Main file path** to `app.py`
+5. Click **Deploy** ✅
 
-> ⚠️ **Important:** The Excel file must be named exactly `Ecommerce_Website_Traffic_India.xlsx` and placed in the **same folder** as `app.py`.
+> ⚠️ Make sure `Ecommerce_Website_Traffic_India.xlsx` is committed to your repo alongside `app.py`.
 
 ---
 
-## 🎨 Dashboard Features
+## 🔧 Sidebar Filters
 
-### 📈 KPI Metrics (Top Section)
-| Metric | Description |
-|--------|-------------|
-| Total Sessions | Count of active user sessions |
-| Conversion Rate | Purchase conversion percentage |
-| Avg Order Value | Average revenue per order (₹) |
-| Bounce Rate | Session abandonment rate |
+| Filter | Type | Description |
+|--------|------|-------------|
+| 📅 Date Range | Date picker | Filter all charts by date window |
+| 🔗 Traffic Source | Multi-select | Direct, Organic Search, Paid Ads, Social Media, Email, Referral |
+| 📱 Device Type | Multi-select | Mobile, Desktop, Tablet |
+| 🎉 Festival | Multi-select | Diwali, Holi, No Festival, etc. |
 
----
-
-### 🔷 4 Interactive 3D Visualization Tabs
-
-#### Tab 1 — 3D Scatter Analysis
-- X-axis: Session Duration (seconds)
-- Y-axis: Pages Viewed per session
-- Z-axis: Order Value (₹)
-- Color-coded by revenue intensity
-- Rotate and zoom interactively
-
-#### Tab 2 — Geographic 3D Analysis
-- Top 15 Indian states plotted in 3D
-- X: Total Sessions | Y: Total Purchases | Z: Total Revenue
-- Bubble size represents revenue volume
-
-#### Tab 3 — Time Series 3D
-- Daily traffic trends over Jan–Nov 2024
-- Identifies seasonal and festival-driven spikes
-- 3D surface/line view for temporal patterns
-
-#### Tab 4 — Product Category 3D
-Five product categories analyzed:
-- 🏠 Home Appliances
-- 🖥️ Office Equipment
-- 💄 Beauty Products
-- 👗 Clothing
-- 📱 Technical Devices
+All filters apply **globally** across every chart and KPI.
 
 ---
 
-### 📊 Detailed Analytics Section
+## 📦 Dependencies
 
-1. **Traffic Source Performance** — Revenue by Organic / Paid / Direct / Social / Referral
-2. **Device Type Conversion** — Conversion rates for Mobile / Desktop / Tablet
-3. **Age Group Distribution** — Pie chart of sessions by age group (10–50 years)
-4. **Festival Impact Analysis** — Revenue comparison across Diwali, Holi, Navratri, Pongal
-
-### 🔥 Additional Features
-- **Correlation Heatmap** — Relationships between 8 numeric variables
-- **Expandable Raw Data Table** — First 100 records with key columns
-- **Real-time Filters** — All charts update instantly on filter change
-
----
-
-## 🔍 Sidebar Filters
-
-| Filter | Options |
-|--------|---------|
-| 📅 Date Range | Jan 2024 – Nov 2024 |
-| 🔗 Traffic Source | Organic, Paid, Direct, Social, Referral |
-| 📱 Device Type | Mobile, Desktop, Tablet |
-| 🎉 Festival | Diwali, Holi, Navratri, Pongal, None |
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `streamlit` | ≥ 1.28.0 | Web app framework |
+| `pandas` | ≥ 2.2.0 | Data loading & manipulation |
+| `numpy` | ≥ 1.26.0 | Numerical operations |
+| `plotly` | ≥ 5.18.0 | All 2D and 3D interactive charts |
+| `openpyxl` | ≥ 3.1.0 | Reading `.xlsx` Excel files |
+| `python-dateutil` | ≥ 2.8.2 | Robust date parsing |
+| `pytz` | ≥ 2023.3 | Timezone handling |
 
 ---
 
-## 📊 Dataset Overview
+## 📁 Dataset Columns
 
-| Property | Value |
-|----------|-------|
-| File | `Ecommerce_Website_Traffic_India.xlsx` |
-| Records | 15,004 sessions |
-| Columns | 22 attributes |
-| Date Range | January – November 2024 |
-| Geography | All Indian states |
-
-### Key Columns Explained
-
-| Column | Description |
-|--------|-------------|
-| `date` | Session date |
-| `user_id` | Unique user identifier |
-| `time` | Session timestamp |
-| `traffic_source` | How user arrived (Organic/Paid/etc.) |
-| `device` | Device type (Mobile/Desktop/Tablet) |
-| `city` | User's city |
-| `state` | User's state |
-| `age` | User age (10–50) |
-| `gender` | User gender |
-| `session_duration_sec` | Time spent on site (20–4,500 sec) |
-| `pages_viewed` | Pages browsed per session (1–25) |
-| `bounce` | Whether user bounced (0/1) |
-| `product_viewed` | Product category viewed |
-| `add_to_cart` | Whether item was added to cart (0/1) |
-| `purchase` | Whether purchase was made (0/1) |
-| `order_value` | Order amount in ₹ (0–39,962) |
-| `festival` | Festival context of session |
-| `category` | Product category |
-
-### Data Quality
-- 15,003 complete records (99.99%)
-- 1 missing `user_id` handled automatically
-- 1 missing `time` value handled automatically
-- No duplicate records
-- Missing numeric values filled with column mean
+| Column | Type | Description |
+|--------|------|-------------|
+| `date` | date | Session date |
+| `time` | string | Session time |
+| `user_id` | string | Unique user identifier |
+| `traffic_source` | string | How the user arrived |
+| `device` | string | Mobile / Desktop / Tablet |
+| `city` | string | User's city |
+| `state` | string | User's state (India) |
+| `session_duration_sec` | int | Length of session in seconds |
+| `pages_viewed` | int | Number of pages visited |
+| `bounce` | int (0/1) | Whether session bounced |
+| `product_viewed` | int | Products viewed count |
+| `home_appliances` | int (0/1) | Category flag |
+| `office_equipments` | int (0/1) | Category flag |
+| `beauty_products` | int (0/1) | Category flag |
+| `clothing` | int (0/1) | Category flag |
+| `technical_devices` | int (0/1) | Category flag |
+| `add_to_cart` | int | Items added to cart |
+| `purchase` | int (0/1) | Whether purchase was made |
+| `order_value` | float | Revenue in ₹ |
+| `age` | int | User age |
+| `gender` | string | User gender |
+| `festival` | string | Active festival during session |
 
 ---
 
-## 🎨 Color Scheme
+## 🎨 Design System
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| 🟦 Dark Blue | `#0F3460` | Headers, primary text |
-| 🟦 Navy | `#16213E` | Sidebar background |
-| 🔴 Coral Red | `#E94560` | Highlights, buttons, accents |
-| 🔵 Cyan | `#00D4FF` | Positive metrics |
-| 🟡 Gold | `#FFB703` | Secondary metrics |
-| 🟥 Light Red | `#FF6B6B` | Bounce rate, warnings |
-| ⬜ Light Gray | `#F8F9FA` | Page background |
-
----
-
-## 🛠️ Technical Stack
-
-| Component | Technology |
-|-----------|-----------|
-| Web Framework | Streamlit |
-| Data Processing | Pandas, NumPy |
-| Visualizations | Plotly (3D + 2D) |
-| Data Source | Excel (.xlsx) via OpenPyXL |
-| Language | Python 3.8+ |
+| Element | Value |
+|---------|-------|
+| Background | `#080d1a` (deep navy) |
+| Card background | `#111827` → `#1a2540` gradient |
+| Accent blue | `#63b3ed` / `#90cdf4` |
+| Accent coral | `#f6875f` |
+| Accent gold | `#fbd38d` |
+| Accent rose | `#fc8181` |
+| Display font | Syne (Google Fonts) |
+| Body font | DM Sans (Google Fonts) |
 
 ---
 
-## 🔧 Customization Guide
+## 🛠️ Troubleshooting
 
-### Change Dashboard Title
-Edit line 12 in `app.py`:
-```python
-page_title="Your Custom Title",
-```
+**App crashes on startup?**
+- Make sure the Excel file name is exactly `Ecommerce_Website_Traffic_India.xlsx` and is in the same folder as `app.py`
 
-### Change Primary Color
-Edit CSS in `app.py` (around line 25):
-```python
---primary: #YOUR_HEX_CODE;
---accent: #YOUR_HEX_CODE;
-```
+**Charts not showing?**
+- Upgrade Plotly: `pip install --upgrade plotly`
 
-### Add a New Filter
-In the sidebar section of `app.py`:
-```python
-new_filter = st.sidebar.multiselect(
-    "🏷️ Your Label",
-    options=df['your_column'].unique(),
-    default=df['your_column'].unique()
-)
-filtered_df = filtered_df[filtered_df['your_column'].isin(new_filter)]
-```
+**Filters show no data?**
+- Try resetting filters — all multiselects must have at least one option selected
+
+**Fonts not loading?**
+- The app loads Google Fonts from the internet. If you're offline, it will fall back to system fonts gracefully.
 
 ---
 
-## 🚀 Deployment
+## 👨‍💻 Author
 
-### Local (Development)
-```bash
-streamlit run app.py
-# Visit: http://localhost:8501
-```
-
-### Streamlit Cloud (Recommended — Free)
-1. Push all files to a GitHub repository
-2. Go to [streamlit.io/cloud](https://streamlit.io/cloud)
-3. Connect your GitHub repo
-4. Set `app.py` as the main module
-5. Click **Deploy** — you'll get a public shareable link
-
-> 📌 Make sure `Ecommerce_Website_Traffic_India.xlsx` is committed to the repo root.
-
-### Different Port (if 8501 is busy)
-```bash
-streamlit run app.py --server.port 8502
-```
+**Ankit**  
+👨‍💻  Data Scientist & Ai Developer  
 
 ---
 
-## 🆘 Troubleshooting
+## 📄 License
 
-| Problem | Cause | Fix |
-|---------|-------|-----|
-| `ModuleNotFoundError` | Packages not installed | `pip install -r requirements.txt` |
-| `FileNotFoundError` on xlsx | Wrong filename or location | Ensure `Ecommerce_Website_Traffic_India.xlsx` is in same folder as `app.py` |
-| Port 8501 in use | Another app running | Use `--server.port 8502` |
-| Charts load slowly | Large unfiltered dataset | Apply sidebar filters to reduce data |
-| Colors look wrong | Browser cache | Press `Ctrl+F5` to hard refresh |
-| Streamlit Cloud install fails | Bad package version in requirements | Use `>=` version constraints, not `==` |
-
-### Verify Installation
-```bash
-python -c "import streamlit; print('Streamlit:', streamlit.__version__)"
-python -c "import plotly; print('Plotly:', plotly.__version__)"
-python -c "import pandas; print('Pandas:', pandas.__version__)"
-python -c "import openpyxl; print('OpenPyXL:', openpyxl.__version__)"
-```
-
-### Clear Cache
-```bash
-streamlit cache clear
-```
-
----
-
-## 💡 Key Business Insights to Explore
-
-1. **Which traffic source drives the most revenue?**
-   → Use the Traffic Source Performance chart
-
-2. **What's the mobile vs desktop conversion difference?**
-   → Use the Device Type Conversion chart
-
-3. **Which age group spends the most?**
-   → Use the Age Group Distribution pie chart
-
-4. **How does Diwali impact sales vs other festivals?**
-   → Apply the Festival filter and compare KPI metrics
-
-5. **Which state is the best market?**
-   → Use the Geographic 3D tab
-
-6. **Is there a correlation between pages viewed and purchase?**
-   → Use the Correlation Heatmap
-
----
-
-## 📱 Browser Compatibility
-
-| Browser | Support |
-|---------|---------|
-| Chrome / Chromium | ✅ Recommended |
-| Firefox | ✅ Full support |
-| Microsoft Edge | ✅ Full support |
-| Safari | ✅ Works well |
-| Mobile browsers | ✅ Responsive design |
-| Internet Explorer | ❌ Not supported |
-
----
-
-## 🔐 Data Privacy
-
-- ✅ All data processing is done **locally** on your machine
-- ✅ No data is sent to external servers
-- ✅ No analytics or tracking embedded
-- ✅ Safe for confidential business data
-
----
-
-## 📚 Learning Resources
-
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [Plotly 3D Charts](https://plotly.com/python/3d-charts/)
-- [Pandas Documentation](https://pandas.pydata.org/docs/)
-- [Python Getting Started](https://www.python.org/about/getting-started/)
-
----
-
-## 🔄 System Requirements
-
-| Requirement | Minimum | Recommended |
-|-------------|---------|-------------|
-| Python | 3.8+ | 3.10+ |
-| RAM | 4 GB | 8 GB |
-| Disk Space | 500 MB | 1 GB |
-| CPU | 2 GHz | 4+ GHz |
-| Browser | Chrome/Firefox | Chrome (latest) |
-
----
-
-## 👤 Credits
-
-**Dashboard Designer:** i_courner/god ✨  
-**Version:** 1.0.0  
-**Dataset:** India E-Commerce Website Traffic (Jan–Nov 2024)  
-**Status:** ✅ Production Ready
-
----
-
-**Happy analyzing! 📊📈**
+This project is for educational and portfolio purposes.  
+Feel free to fork, modify, and deploy with credit.
