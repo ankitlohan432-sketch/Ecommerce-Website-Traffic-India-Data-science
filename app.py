@@ -77,7 +77,7 @@ st.markdown("""
     
     /* Metric Cards */
     .metric-card {
-        background: Black;
+        background: white;
         padding: 25px;
         border-radius: 12px;
         border-left: 5px solid #E94560;
@@ -154,7 +154,7 @@ st.markdown("""
 # ============================================================================
 @st.cache_data
 def load_data():
-    df = pd.read_excel('Ecommerce_Website_Traffic_India.xlsx')
+    df = pd.read_excel('/mnt/user-data/uploads/Ecommerce_Website_Traffic_India_MORE_DIRTY.xlsx')
     
     # Data Cleaning
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
@@ -229,7 +229,7 @@ st.markdown("""
 # Designer Credit
 st.markdown("""
 <div class="designer-credit">
-    🎨 Designer: i_courner/god
+    🎨 Designer: Ankit
 </div>
 """, unsafe_allow_html=True)
 
@@ -245,7 +245,7 @@ with col1:
     <div class="metric-card">
         <h4>👥 Total Sessions</h4>
         <h2 style="color: #E94560; font-size: 2.5em; margin: 10px 0;">{len(filtered_df):,}</h2>
-        <p style="color: #999; margin: 0;">Active User Sessions</p>
+        <p style="color: #000000; margin: 0; font-weight: 600;">Active User Sessions</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -255,7 +255,7 @@ with col2:
     <div class="metric-card">
         <h4>🎯 Conversion Rate</h4>
         <h2 style="color: #00D4FF; font-size: 2.5em; margin: 10px 0;">{conversion_rate:.2f}%</h2>
-        <p style="color: #999; margin: 0;">Purchase Conversion</p>
+        <p style="color: #000000; margin: 0; font-weight: 600;">Purchase Conversion</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -265,7 +265,7 @@ with col3:
     <div class="metric-card">
         <h4>💰 Avg Order Value</h4>
         <h2 style="color: #FFB703; font-size: 2.5em; margin: 10px 0;">₹{avg_order_value:,.0f}</h2>
-        <p style="color: #999; margin: 0;">Average Revenue</p>
+        <p style="color: #000000; margin: 0; font-weight: 600;">Average Revenue</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -275,7 +275,7 @@ with col4:
     <div class="metric-card">
         <h4>📉 Bounce Rate</h4>
         <h2 style="color: #FF6B6B; font-size: 2.5em; margin: 10px 0;">{bounce_rate:.2f}%</h2>
-        <p style="color: #999; margin: 0;">Session Exits</p>
+        <p style="color: #000000; margin: 0; font-weight: 600;">Session Exits</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -333,9 +333,9 @@ with tab1:
         fig_3d_scatter.update_layout(
             title='<b>Session Duration vs Pages Viewed vs Order Value</b>',
             scene=dict(
-                xaxis=dict(title='<b>Session Duration (seconds)</b>', backgroundcolor="#f0f0f0"),
-                yaxis=dict(title='<b>Pages Viewed</b>', backgroundcolor="#f0f0f0"),
-                zaxis=dict(title='<b>Order Value (₹)</b>', backgroundcolor="#f0f0f0"),
+                xaxis=dict(title='<b>Session Duration (seconds)</b>', backgroundcolor="#f0f0f0", titlefont=dict(color="#FFFFFF", size=12)),
+                yaxis=dict(title='<b>Pages Viewed</b>', backgroundcolor="#f0f0f0", titlefont=dict(color="#FFFFFF", size=12)),
+                zaxis=dict(title='<b>Order Value (₹)</b>', backgroundcolor="#f0f0f0", titlefont=dict(color="#FFFFFF", size=12)),
                 camera=dict(
                     eye=dict(x=1.5, y=1.5, z=1.3)
                 )
@@ -400,9 +400,9 @@ with tab2:
     fig_3d_geo.update_layout(
         title='<b>Top States: 3D Revenue Analysis</b>',
         scene=dict(
-            xaxis=dict(title='<b>Total Sessions</b>'),
-            yaxis=dict(title='<b>Total Purchases</b>'),
-            zaxis=dict(title='<b>Total Revenue (₹)</b>'),
+            xaxis=dict(title='<b>Total Sessions</b>', titlefont=dict(color="#FFFFFF", size=12)),
+            yaxis=dict(title='<b>Total Purchases</b>', titlefont=dict(color="#FFFFFF", size=12)),
+            zaxis=dict(title='<b>Total Revenue (₹)</b>', titlefont=dict(color="#FFFFFF", size=12)),
             camera=dict(eye=dict(x=1.5, y=1.5, z=1.3))
         ),
         height=700,
@@ -450,9 +450,9 @@ with tab3:
     fig_3d_time.update_layout(
         title='<b>Daily Traffic & Revenue Trend</b>',
         scene=dict(
-            xaxis=dict(title='<b>Days</b>'),
-            yaxis=dict(title='<b>Sessions</b>'),
-            zaxis=dict(title='<b>Revenue (₹)</b>'),
+            xaxis=dict(title='<b>Days</b>', titlefont=dict(color="#FFFFFF", size=12)),
+            yaxis=dict(title='<b>Sessions</b>', titlefont=dict(color="#FFFFFF", size=12)),
+            zaxis=dict(title='<b>Revenue (₹)</b>', titlefont=dict(color="#FFFFFF", size=12)),
         ),
         height=700,
         template='plotly_white',
@@ -503,9 +503,9 @@ with tab4:
     fig_3d_cat.update_layout(
         title='<b>Product Categories: 3D Performance Matrix</b>',
         scene=dict(
-            xaxis=dict(title='<b>Total Views</b>'),
-            yaxis=dict(title='<b>Total Purchases</b>'),
-            zaxis=dict(title='<b>Total Revenue (₹)</b>'),
+            xaxis=dict(title='<b>Total Views</b>', titlefont=dict(color="#FFFFFF", size=12)),
+            yaxis=dict(title='<b>Total Purchases</b>', titlefont=dict(color="#FFFFFF", size=12)),
+            zaxis=dict(title='<b>Total Revenue (₹)</b>', titlefont=dict(color="#FFFFFF", size=12)),
         ),
         height=700,
         template='plotly_white',
@@ -743,7 +743,7 @@ st.markdown("""
     </p>
     <hr style="opacity: 0.3; margin: 15px 0;">
     <p style="margin: 0; font-size: 0.9em; opacity: 0.8;">
-        🎨 Designed by: <b>i_courner/god</b> | 📅 Updated: 2024
+        🎨 Designed by: <b>Ankit</b> | 📅 Updated: 2024
     </p>
 </div>
 """, unsafe_allow_html=True)
